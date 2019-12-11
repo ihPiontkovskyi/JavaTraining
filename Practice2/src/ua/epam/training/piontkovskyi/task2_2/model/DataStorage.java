@@ -59,14 +59,26 @@ public class DataStorage {
         Arrays.sort(bookList, new BookPublisherComparator());
     }
 
-    private Book[] getBookByFilter(Predicate<Book> consumer) {
+    private Book[] getBookByFilter(Predicate<Book> predicate) {
         Book[] subList = new Book[SIZE];
         for (int i = 0; i < SIZE; i++) {
-            if (consumer.test(bookList[i])) {
+            if (predicate.test(bookList[i])) {
                 subList[i] = bookList[i];
             }
         }
-        return subList;
+        int subLength = 0;
+        for (Book book : subList) {
+            if (book != null) {
+                subLength++;
+            }
+        }
+        Book[] result = new Book[subLength];
+        for (int i = 0, j = 0; i < SIZE; ++i) {
+            if (subList[i] != null) {
+                result[j++] = subList[i];
+            }
+        }
+        return result;
     }
 
     private void fillDataStorage() {
