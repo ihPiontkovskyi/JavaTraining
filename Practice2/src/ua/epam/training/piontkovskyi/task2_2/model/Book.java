@@ -1,15 +1,13 @@
 package ua.epam.training.piontkovskyi.task2_2.model;
 
+import java.util.Comparator;
+
 public class Book {
     private String name;
     private String author;
     private String publisher;
     private int publishYear;
     private int pagesNumber;
-
-    public String getName() {
-        return name;
-    }
 
     public void setName(String name) {
         this.name = name;
@@ -39,10 +37,6 @@ public class Book {
         this.publishYear = publishYear;
     }
 
-    public int getPagesNumber() {
-        return pagesNumber;
-    }
-
     public void setPagesNumber(int pagesNumber) {
         this.pagesNumber = pagesNumber;
     }
@@ -54,6 +48,18 @@ public class Book {
                 ", author=" + author +
                 ", publisher=" + publisher +
                 ", publishYear=" + publishYear +
-                ", pagesNumber=" + pagesNumber;
+                ", pagesNumber=" + pagesNumber + "\n";
     }
+
+    public static Comparator<Book> getBookByPublisherComparator() {
+        return new BookByPublisherComparator();
+    }
+
+    private static class BookByPublisherComparator implements Comparator<Book> {
+        @Override
+        public int compare(Book o1, Book o2) {
+            return o1.getPublisher().compareTo(o2.getPublisher());
+        }
+    }
+
 }
