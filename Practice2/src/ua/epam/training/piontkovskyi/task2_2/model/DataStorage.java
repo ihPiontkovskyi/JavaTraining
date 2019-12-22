@@ -1,6 +1,7 @@
 package ua.epam.training.piontkovskyi.task2_2.model;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 public class DataStorage {
@@ -28,7 +29,12 @@ public class DataStorage {
 
     public Book[] sortByPublishers() {
         Book[] booksCopy = Arrays.copyOf(books, books.length);
-        Arrays.sort(booksCopy, Book.getBookByPublisherComparator());
+        Arrays.sort(booksCopy, new Comparator<Book>() {
+            @Override
+            public int compare(Book o1, Book o2) {
+                return o1.getPublisher().compareTo(o2.getPublisher());
+            }
+        });
         return booksCopy;
     }
 

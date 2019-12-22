@@ -6,13 +6,8 @@ public class Constants {
     public static String WRONG_COMMAND_MESSAGE = "There is no such command\n";
 
     public static String SELECT_TOY_TYPE_MESSAGE = "Select toy type:\n1.Car\n2.Lego\n3.Puzzle\n";
-    public static String SELECT_TOY_EXTEND_CAR_MESSAGE = "Select toy type:\n1.Car";
-    public static String SELECT_TOY_EXTEND_PUZZLE_MESSAGE = "Select toy type:\n1.Puzzle";
-    public static String SELECT_TOY_EXTEND_LEGO_MESSAGE = "Select toy type:\n1.Lego";
 
     public static String INIT_PLAYROOM_MESSAGE = "Select playroom type:\n1.Car\n2.Lego\n3.Puzzle\n4.Toy\n5.Exit\n";
-
-    public static String ERROR_ADD_MESSAGE = "This type of toys cannot be added to the %s game room";
 
     public static String ALL_COMMANDS_MESSAGE =
             "Command:\n" +
@@ -25,10 +20,11 @@ public class Constants {
 
     public static final String ENTER_COMMAND_MESSAGE = "Enter command number -> ";
 
-    public static final String FILTER_MESSAGE = "Enter a value or leave it blank to ignore the criterion\n";
+    public static final String FILTER_MESSAGE = "Enter a value or leave it blank to ignore the criterion\n" +
+            "For input range value(numeric only) enter number by space\n";
 
     public static final String ENTER_NAME_MESSAGE = "Enter toy name -> ";
-    public static final String ENTER_COUNTRY_MESSAGE = "Enter toy country of production -> ";
+    public static final String ENTER_COUNTRY_MESSAGE = "Enter. toy country of production -> ";
     public static final String ENTER_MATERIAL_MESSAGE = "Enter toy material -> ";
     public static final String ENTER_PRICE_MESSAGE = "Enter toy price ->";
     public static final String ENTER_AGE_LIMIT_MESSAGE = "Enter toy age limit - >";
