@@ -11,10 +11,6 @@ public class Circle extends Shape {
         this.radius = radius;
     }
 
-    private boolean isCircle(int radius) {
-        return radius > 0;
-    }
-
     @Override
     public double calcArea() {
         return Math.PI * radius * radius;
@@ -23,5 +19,9 @@ public class Circle extends Shape {
     @Override
     public String toString() {
         return super.toString() + ", radius=" + radius;
+    }
+
+    private boolean isCircle(int radius) {
+        return radius > 0;
     }
 }

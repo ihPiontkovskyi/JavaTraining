@@ -1,6 +1,7 @@
 package ua.epam.training.piontkovskyi.task2_1.model;
 
 import java.util.Arrays;
+import java.util.Comparator;
 
 public class DataStorage {
     private Shape[] shapeList;
@@ -8,10 +9,9 @@ public class DataStorage {
 
     public DataStorage() {
         shapeList = new Shape[SIZE];
-        fillList();
     }
 
-    private void fillList() {
+    public void fillList() {
         try {
             shapeList[0] = new Circle("RED", 4);
             shapeList[1] = new Rectangle("BLUE", 4, 5);
@@ -31,11 +31,21 @@ public class DataStorage {
     }
 
     public void sortByColor() {
-        Arrays.sort(shapeList, new ShapeColorComparator());
+        Arrays.sort(shapeList, new Comparator<Shape>() {
+            @Override
+            public int compare(Shape o1, Shape o2) {
+                return o1.getShapeColor().compareTo(o2.getShapeColor());
+            }
+        });
     }
 
     public void sortByArea() {
-        Arrays.sort(shapeList, new ShapeAreaComparator());
+        Arrays.sort(shapeList, new Comparator<Shape>() {
+            @Override
+            public int compare(Shape o1, Shape o2) {
+                return (int) (o1.calcArea() - o2.calcArea());
+            }
+        });
     }
 
     public String[] getShapeList() {
@@ -57,7 +67,7 @@ public class DataStorage {
     public double getSumArea(Class<? extends Shape> type) {
         double result = 0.0;
         for (Shape shape : shapeList) {
-            if (shape.getClass().getSimpleName().equals(type.getSimpleName())) {
+            if (shape.getClass().equals(type)) {
                 result += shape.calcArea();
             }
         }

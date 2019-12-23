@@ -13,10 +13,6 @@ public class Rectangle extends Shape {
         this.width = width;
     }
 
-    private boolean isRectangle(int l, int w) {
-        return l > 0 && w > 0;
-    }
-
     @Override
     public double calcArea() {
         return length * width;
@@ -25,5 +21,9 @@ public class Rectangle extends Shape {
     @Override
     public String toString() {
         return super.toString() + ", length=" + length + ", width=" + width;
+    }
+
+    private boolean isRectangle(int l, int w) {
+        return l > 0 && w > 0;
     }
 }

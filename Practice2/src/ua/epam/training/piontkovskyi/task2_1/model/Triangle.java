@@ -15,13 +15,6 @@ public class Triangle extends Shape {
         this.c = c;
     }
 
-    private boolean isTriangle(int a, int b, int c) {
-        if (a <= 0 || b <= 0 || c <= 0) {
-            return false;
-        }
-        return a + b > c && a + c > b && b + c > a;
-    }
-
     @Override
     public double calcArea() {
         double p = (a + b + c) / 2.0;
@@ -34,5 +27,12 @@ public class Triangle extends Shape {
                 ", a=" + a +
                 ", b=" + b +
                 ", c=" + c;
+    }
+
+    private boolean isTriangle(int a, int b, int c) {
+        if (a <= 0 || b <= 0 || c <= 0) {
+            return false;
+        }
+        return a + b > c && a + c > b && b + c > a;
     }
 }

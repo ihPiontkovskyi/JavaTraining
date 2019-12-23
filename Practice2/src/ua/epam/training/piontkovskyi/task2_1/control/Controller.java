@@ -16,6 +16,7 @@ public class Controller {
     public Controller() {
         view = new View();
         dataStorage = new DataStorage();
+        dataStorage.fillList();
     }
 
     public void run() {
