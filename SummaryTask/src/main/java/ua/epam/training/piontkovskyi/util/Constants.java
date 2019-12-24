@@ -17,9 +17,18 @@ public class Constants {
                     "3.Find a car in a company corresponding to a given range of speed parameters\n" +
                     "4.Print taxi pool\n" +
                     "5.Exit\n" +
-                    "6.Show all commands\n";
+                    "6.Show all commands\n" +
+                    "7.Open taxi service\n";
+
+    public static String MAKE_ORDER_MESSAGE = "Do you want make order? 1 - Yes 0 - No ->";
 
     public static final String ENTER_COMMAND_MESSAGE = "Enter command number -> ";
+
+    public static final String ENTER_DISTANCE_MESSAGE = "Enter distance -> ";
+
+    public static final String SELECT_CAR_MESSAGE = "Select car -> ";
+
+    public static final String ORDER_CAR_MESSAGE = "Wait for car, total price: %.2f\n";
 
     public static final String ENTER_START_RANGE_MESSAGE = "Enter start of max speed range -> ";
 
@@ -32,4 +41,7 @@ public class Constants {
     public static final String ENTER_COMPANY_MESSAGE = "Enter the company where you want to search for cars -> ";
 
     public static final String NO_SUCH_COMPANY_MESSAGE = "There isn`t such company\n";
+    public static final String NO_SUCH_CAR_MESSAGE = "There isn`t such car\n";
+
+    public static final String NOT_AVAILABLE_CAR_MESSAGE = "There isn`t available taxi\n";
 }

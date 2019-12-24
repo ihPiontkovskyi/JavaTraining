@@ -4,7 +4,7 @@ package ua.epam.training.piontkovskyi.model.entity;
 import ua.epam.training.piontkovskyi.model.data.Manufacturer;
 import ua.epam.training.piontkovskyi.model.data.Type;
 
-public abstract class Car implements CargoTransportable, PassengerTransportable {
+public abstract class AbstractTaxi implements ITaxi {
 
     private Manufacturer manufacturer;
     private Type type;
@@ -16,6 +16,9 @@ public abstract class Car implements CargoTransportable, PassengerTransportable 
     private boolean airConditioning;
     private int passenger = 0;
     private int cargoWeight = 0;
+
+    protected int distance;
+    private boolean busy;
 
     @Override
     public String toString() {
@@ -138,7 +141,18 @@ public abstract class Car implements CargoTransportable, PassengerTransportable 
         return cargoWeight;
     }
 
-    protected static abstract class CarBuilder<U extends Car, V extends CarBuilder> {
+    @Override
+    public boolean isBusy() {
+        return busy;
+    }
+
+    @Override
+    public void makeOrder(int distance) {
+        this.distance = distance;
+        this.busy = true;
+    }
+
+    protected static abstract class CarBuilder<U extends AbstractTaxi, V extends CarBuilder> {
         protected U actualClass;
         protected V actualBuilder;
 

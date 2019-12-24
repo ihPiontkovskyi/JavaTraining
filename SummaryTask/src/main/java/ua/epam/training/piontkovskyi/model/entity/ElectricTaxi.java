@@ -1,12 +1,13 @@
 package ua.epam.training.piontkovskyi.model.entity;
 
-public class ElectricCar extends Car {
+public class ElectricTaxi extends AbstractTaxi {
 
     private String batteryType;
     private int chargingTime;
     private int lifetimeBattery;
+    public static double ELECTRIC_CAR_COEFFICIENT = 0.25;
 
-    protected ElectricCar() {
+    protected ElectricTaxi() {
     }
 
     public String getBatteryType() {
@@ -34,6 +35,10 @@ public class ElectricCar extends Car {
     }
 
 
+    @Override
+    public double calcPrice() {
+        return getManufacturer().getCarClass().getCoefficient()*distance*ELECTRIC_CAR_COEFFICIENT;
+    }
 
     @Override
     public String toString() {
@@ -43,7 +48,7 @@ public class ElectricCar extends Car {
                 ", lifetimeBattery=" + lifetimeBattery;
     }
 
-    public static class Builder extends CarBuilder<ElectricCar, Builder> {
+    public static class Builder extends CarBuilder<ElectricTaxi, Builder> {
 
         public Builder withBatteryType(String batteryType) {
             actualClass.setBatteryType(batteryType);
@@ -61,8 +66,8 @@ public class ElectricCar extends Car {
         }
 
         @Override
-        protected ElectricCar getActual() {
-            return new ElectricCar();
+        protected ElectricTaxi getActual() {
+            return new ElectricTaxi();
         }
 
         @Override
@@ -71,7 +76,7 @@ public class ElectricCar extends Car {
         }
 
         @Override
-        public ElectricCar build() {
+        public ElectricTaxi build() {
             return actualClass;
         }
     }

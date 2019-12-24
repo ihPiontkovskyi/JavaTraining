@@ -1,11 +1,12 @@
 package ua.epam.training.piontkovskyi.model.entity;
 
-public class GasCar extends Car implements CargoTransportable, PassengerTransportable {
+public class GasTaxi extends AbstractTaxi {
     private String fuelType;
     private int fuelTankCapacity;
     private int fuelConsumption;
+    public static double GAS_CAR_COEFFICIENT = 0.5;
 
-    protected GasCar() {
+    protected GasTaxi() {
     }
 
     public String getFuelType() {
@@ -32,6 +33,10 @@ public class GasCar extends Car implements CargoTransportable, PassengerTranspor
         this.fuelConsumption = fuelConsumption;
     }
 
+    @Override
+    public double calcPrice() {
+        return getManufacturer().getCarClass().getCoefficient()*distance*GAS_CAR_COEFFICIENT;
+    }
 
     @Override
     public String toString() {
@@ -41,7 +46,7 @@ public class GasCar extends Car implements CargoTransportable, PassengerTranspor
                 ", fuelConsumption=" + fuelConsumption;
     }
 
-    public static class Builder extends CarBuilder<GasCar, Builder> {
+    public static class Builder extends CarBuilder<GasTaxi, Builder> {
 
         public Builder withFuelType(String fuelType) {
             actualClass.setFuelType(fuelType);
@@ -59,8 +64,8 @@ public class GasCar extends Car implements CargoTransportable, PassengerTranspor
         }
 
         @Override
-        protected GasCar getActual() {
-            return new GasCar();
+        protected GasTaxi getActual() {
+            return new GasTaxi();
         }
 
         @Override
@@ -69,7 +74,7 @@ public class GasCar extends Car implements CargoTransportable, PassengerTranspor
         }
 
         @Override
-        public GasCar build() {
+        public GasTaxi build() {
             return actualClass;
         }
     }

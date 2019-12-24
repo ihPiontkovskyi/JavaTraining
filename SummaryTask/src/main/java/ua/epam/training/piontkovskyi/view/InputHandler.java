@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 
 public class InputHandler {
 
-    private static final String INTEGER_REGEX = "[0-9]+";
+    private static final String INTEGER_REGEX = "\\d+";
     private static Scanner sc = new Scanner(System.in);
 
     private View view;
@@ -23,7 +23,7 @@ public class InputHandler {
     public Integer inputInt() {
         while (true) {
             String receivedString = sc.nextLine().trim();
-            if (!INTEGER_REGEX.matches(receivedString)) {//
+            if (!receivedString.matches(INTEGER_REGEX)) {//
                 view.print(Constants.WRONG_INPUT_MESSAGE);
             } else {
                 return Integer.parseInt(receivedString);
