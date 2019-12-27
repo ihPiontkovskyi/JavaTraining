@@ -1,7 +1,5 @@
 package ua.epam.training.piontkovskyi.task2_2.model;
 
-import java.util.Comparator;
-
 public class Book {
     private String name;
     private String author;
