@@ -1,6 +1,7 @@
 package ua.epam.training.piontkovskyi.task5_4;
 
 public class RBTree<T extends Comparable<T>> {
+
     enum Color {RED, BLACK}
 
     private class Node {
@@ -8,14 +9,10 @@ public class RBTree<T extends Comparable<T>> {
         private Node parent;
         private Node left;
         private Node right;
-        private int numLeft;
-        private int numRight;
         private Color color;
 
         Node() {
             color = Color.BLACK;
-            numLeft = 0;
-            numRight = 0;
             parent = null;
             left = null;
             right = null;
@@ -26,20 +23,20 @@ public class RBTree<T extends Comparable<T>> {
             this.key = key;
         }
 
-        public StringBuilder toString(StringBuilder prefix, boolean isTail, StringBuilder sb) {
+        private StringBuilder buildTree(StringBuilder prefix, boolean isTail, StringBuilder sb) {
             if (right != nil) {
-                right.toString(new StringBuilder().append(prefix).append(isTail ? "│   " : "    "), false, sb);
+                right.buildTree(new StringBuilder().append(prefix).append(isTail ? "│   " : "    "), false, sb);
             }
             sb.append(prefix).append(isTail ? "└── " : "┌── ").append(color).append("(").append(key.toString()).append(")").append("\n");
             if (left != nil) {
-                left.toString(new StringBuilder().append(prefix).append(isTail ? "    " : "│   "), true, sb);
+                left.buildTree(new StringBuilder().append(prefix).append(isTail ? "    " : "│   "), true, sb);
             }
             return sb;
         }
 
         @Override
         public String toString() {
-            return this.toString(new StringBuilder(), true, new StringBuilder()).toString();
+            return this.buildTree(new StringBuilder(), true, new StringBuilder()).toString();
         }
     }
 
@@ -53,7 +50,6 @@ public class RBTree<T extends Comparable<T>> {
     }
 
     private void leftRotate(Node node) {
-        leftRotateFixup(node);
         Node tmp;
         tmp = node.right;
         node.right = tmp.left;
@@ -72,30 +68,7 @@ public class RBTree<T extends Comparable<T>> {
         node.parent = tmp;
     }
 
-    private void leftRotateFixup(Node node) {
-        if (isNil(node.left) && isNil(node.right.left)) {
-            node.numLeft = 0;
-            node.numRight = 0;
-            node.right.numLeft = 1;
-        } else if (isNil(node.left) && !isNil(node.right.left)) {
-            node.numLeft = 0;
-            node.numRight = 1 + node.right.left.numLeft +
-                    node.right.left.numRight;
-            node.right.numLeft = 2 + node.right.left.numLeft +
-                    node.right.left.numRight;
-        } else if (!isNil(node.left) && isNil(node.right.left)) {
-            node.numRight = 0;
-            node.right.numLeft = 2 + node.left.numLeft + node.left.numRight;
-        } else {
-            node.numRight = 1 + node.right.left.numLeft +
-                    node.right.left.numRight;
-            node.right.numLeft = 3 + node.left.numLeft + node.left.numRight +
-                    node.right.left.numLeft + node.right.left.numRight;
-        }
-    }
-
     private void rightRotate(Node node) {
-        rightRotateFixup(node);
         Node tmp = node.left;
         node.left = tmp.right;
         if (!isNil(tmp.right)) {
@@ -113,30 +86,6 @@ public class RBTree<T extends Comparable<T>> {
         node.parent = tmp;
     }
 
-    private void rightRotateFixup(Node node) {
-        if (isNil(node.right) && isNil(node.left.right)) {
-            node.numRight = 0;
-            node.numLeft = 0;
-            node.left.numRight = 1;
-        } else if (isNil(node.right) && !isNil(node.left.right)) {
-            node.numRight = 0;
-            node.numLeft = 1 + node.left.right.numRight +
-                    node.left.right.numLeft;
-            node.left.numRight = 2 + node.left.right.numRight +
-                    node.left.right.numLeft;
-        } else if (!isNil(node.right) && isNil(node.left.right)) {
-            node.numLeft = 0;
-            node.left.numRight = 2 + node.right.numRight + node.right.numLeft;
-        } else {
-            node.numLeft = 1 + node.left.right.numRight +
-                    node.left.right.numLeft;
-            node.left.numRight = 3 + node.right.numRight +
-                    node.right.numLeft +
-                    node.left.right.numRight + node.left.right.numLeft;
-        }
-
-    }
-
     public void insert(T key) {
         insert(new Node(key));
     }
@@ -147,10 +96,8 @@ public class RBTree<T extends Comparable<T>> {
         while (!isNil(search)) {
             tmp = search;
             if (node.key.compareTo(search.key) < 0) {
-                search.numLeft++;
                 search = search.left;
             } else {
-                search.numRight++;
                 search = search.right;
             }
         }
@@ -214,4 +161,5 @@ public class RBTree<T extends Comparable<T>> {
     public String toString() {
         return "RedBlackTree:\n" + root;
     }
+
 }
