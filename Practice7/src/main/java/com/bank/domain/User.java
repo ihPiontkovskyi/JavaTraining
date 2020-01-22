@@ -8,7 +8,7 @@ import static com.bank.utility.CollectionUtility.nullSafeListInitialize;
 public class User {
     private final Integer id;
     private final String email;
-    private final String password;
+    private String password;
     private final List<Account> accounts;
 
     private User(Builder builder) {
@@ -32,6 +32,10 @@ public class User {
 
     public List<Account> getAccounts() {
         return accounts;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public static Builder builder() {

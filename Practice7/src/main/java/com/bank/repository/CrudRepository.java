@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface CrudRepository<E> {
     //creat
-    void save(E entity);
+    boolean save(E entity);
 
     //read
     E findById(Integer id);

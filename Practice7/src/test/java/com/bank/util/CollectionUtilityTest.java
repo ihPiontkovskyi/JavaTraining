@@ -1,4 +1,4 @@
-package com.bank;
+package com.bank.util;
 
 import com.bank.utility.CollectionUtility;
 import org.junit.Test;

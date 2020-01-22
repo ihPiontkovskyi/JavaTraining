@@ -1,4 +1,4 @@
-package com.bank;
+package com.bank.rep;
 
 import com.bank.domain.User;
 import com.bank.repository.UserRepository;

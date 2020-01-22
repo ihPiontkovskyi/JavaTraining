@@ -12,15 +12,16 @@ public class AccountRepositoryImpl implements AccountRepository {
     private final Map<Integer, Account> accountIdToAccount = new HashMap<>();
 
     @Override
-    public void save(Account entity) {
+    public boolean save(Account entity) {
         if (entity != null) {
             if (!accountIdToAccount.containsKey(entity.getId())) {
                 accountIdToAccount.put(entity.getId(), entity);
+                return true;
             } else {
-                throw new IllegalArgumentException("There is no user with the same id");
+                return false;
             }
         } else {
-            throw new IllegalArgumentException("User is null");
+            return false;
         }
     }
 

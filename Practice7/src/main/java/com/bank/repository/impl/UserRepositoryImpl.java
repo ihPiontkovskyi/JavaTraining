@@ -7,25 +7,27 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public class UserRepositoryImpl implements UserRepository {
     private final Map<Integer, User> userIdToUser = new HashMap<>();
 
     @Override
-    public User findByEmail(String email) {
-        return userIdToUser.values().stream().filter(o -> o.getEmail().equals(email)).findFirst().orElse(null);
+    public Optional<User> findByEmail(String email) {
+        return userIdToUser.values().stream().filter(o -> o.getEmail().equals(email)).findFirst();
     }
 
     @Override
-    public void save(User entity) {
+    public boolean save(User entity) {
         if (entity != null) {
             if (!userIdToUser.containsKey(entity.getId())) {
                 userIdToUser.put(entity.getId(), entity);
+                return true;
             } else {
-                throw new IllegalArgumentException("There is no user with the same id");
+                return false;
             }
         } else {
-            throw new IllegalArgumentException("User is null");
+            return false;
         }
     }
 
