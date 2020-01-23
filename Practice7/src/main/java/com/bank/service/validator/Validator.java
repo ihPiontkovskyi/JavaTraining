@@ -1,4 +1,4 @@
-package com.bank.validator;
+package com.bank.service.validator;
 
 import com.bank.exception.InvalidFieldException;
 

@@ -2,8 +2,8 @@ package com.bank.valid;
 
 import com.bank.domain.User;
 import com.bank.exception.InvalidFieldException;
-import com.bank.validator.Validator;
-import com.bank.validator.impl.UserValidator;
+import com.bank.service.validator.Validator;
+import com.bank.service.validator.impl.UserValidator;
 import org.junit.Before;
 import org.junit.Test;
 

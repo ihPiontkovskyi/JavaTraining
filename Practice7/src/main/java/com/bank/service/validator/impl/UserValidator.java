@@ -1,8 +1,8 @@
-package com.bank.validator.impl;
+package com.bank.service.validator.impl;
 
 import com.bank.domain.User;
 import com.bank.exception.InvalidFieldException;
-import com.bank.validator.Validator;
+import com.bank.service.validator.Validator;
 
 import java.util.regex.Pattern;
 
@@ -34,4 +34,5 @@ public class UserValidator implements Validator<User> {
         }
         return Pattern.matches("^\\w{4,}@\\w+.[a-zA-Z]+$", email);
     }
+
 }

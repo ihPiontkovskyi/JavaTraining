@@ -23,6 +23,7 @@ public class AccountRepositoryTest {
                 .withAccounts(CollectionUtility.nullSafeListInitialize(null))
                 .build();
         repository.save(new Account(1, user, 1000));
+
     }
 
     @After

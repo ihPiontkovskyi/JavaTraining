@@ -2,10 +2,14 @@ package com.bank.service.impl;
 
 import com.bank.domain.User;
 import com.bank.exception.InvalidFieldException;
+import com.bank.exception.NoSuchUserException;
 import com.bank.repository.UserRepository;
 import com.bank.service.UserService;
+import com.bank.service.validator.Validator;
 import com.bank.utility.PasswordEncrypt;
-import com.bank.validator.Validator;
+
+import java.util.List;
+import java.util.Optional;
 
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
@@ -19,11 +23,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean login(String email, String password) {
-        String encryptedPassword = PasswordEncrypt.encrypt(password);
-
         return userRepository.findByEmail(email)
                 .map(User::getPassword)
-                .filter(pass -> pass.equals(encryptedPassword))
+                .filter(pass -> PasswordEncrypt.checkPw(password,pass))
                 .isPresent();
     }
 
@@ -35,8 +37,26 @@ public class UserServiceImpl implements UserService {
             userRepository.save(user);
             return true;
         } catch (InvalidFieldException ex) {
-            System.err.println(ex.getMessage());
             return false;
         }
+    }
+
+    @Override
+    public List<User> findAll() {
+        return userRepository.findAll();
+    }
+
+    @Override
+    public User findById(int id) {
+        return userRepository.findById(id);
+    }
+
+    @Override
+    public User findByEmail(String email) {
+        Optional<User> user = userRepository.findByEmail(email);
+        if (user.isPresent()) {
+            return user.get();
+        }
+        throw new NoSuchUserException("No such user!");
     }
 }

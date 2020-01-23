@@ -18,6 +18,8 @@ public class User {
         this.accounts = nullSafeListInitialize(builder.accounts);
     }
 
+
+
     public Integer getId() {
         return id;
     }
