@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 public class UserValidator implements Validator<User> {
 
     @Override
-    public void validate(User entity) throws InvalidFieldException {
+    public void validate(User entity) {
         if (entity == null) {
             throw new IllegalArgumentException("User is null!");
         }

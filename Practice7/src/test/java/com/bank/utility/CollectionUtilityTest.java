@@ -1,6 +1,5 @@
-package com.bank.util;
+package com.bank.utility;
 
-import com.bank.utility.CollectionUtility;
 import org.junit.Test;
 
 import java.util.Arrays;

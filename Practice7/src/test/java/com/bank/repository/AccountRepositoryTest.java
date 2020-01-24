@@ -1,17 +1,21 @@
-package com.bank.rep;
+package com.bank.repository;
 
 import com.bank.domain.Account;
 import com.bank.domain.User;
-import com.bank.repository.AccountRepository;
 import com.bank.repository.impl.AccountRepositoryImpl;
 import com.bank.utility.CollectionUtility;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 public class AccountRepositoryTest {
     private AccountRepository repository;
+
+    @Rule
+    public ExpectedException exception = ExpectedException.none();
 
     @Before
     public void initRepository() {
@@ -31,28 +35,31 @@ public class AccountRepositoryTest {
         repository = null;
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void findByIdShouldThrowIllegalArgument() {
+        exception.expect(IllegalArgumentException.class);
         repository.findById(null);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void updateShouldThrowIllegalArgument() {
+        exception.expect(IllegalArgumentException.class);
         repository.update(null);
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void saveShouldThrowIllegalArgument() {
-        repository.save(null);
+    @Test
+    public void saveShouldThrowReturnFalse() {
+        Assert.assertFalse(repository.save(null));
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void saveShouldThrowIllegalArgument2() {
-        repository.save(new Account(1, null, null));
+    @Test
+    public void saveShouldReturnFalse2() {
+        Assert.assertFalse(repository.save(new Account(1, null, null)));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void updateShouldThrowIllegalArgument2() {
+        exception.expect(IllegalArgumentException.class);
         repository.update(new Account(2, null, null));
     }
 

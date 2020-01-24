@@ -1,16 +1,23 @@
-package com.bank.rep;
+package com.bank.repository;
 
 import com.bank.domain.User;
-import com.bank.repository.UserRepository;
 import com.bank.repository.impl.UserRepositoryImpl;
 import com.bank.utility.CollectionUtility;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
+
+import java.util.Optional;
+
+import static org.junit.Assert.assertFalse;
 
 public class UserRepositoryTest {
     private UserRepository repository;
+    @Rule
+    public ExpectedException exception = ExpectedException.none();
 
     @Before
     public void initRepository() {
@@ -30,31 +37,34 @@ public class UserRepositoryTest {
 
     @Test
     public void findByEmailShouldReturnNull() {
-        Assert.assertNull(repository.findByEmail(null));
+        Assert.assertEquals(Optional.empty(), repository.findByEmail(null));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void findByIdShouldThrowIllegalArgument() {
+        exception.expect(IllegalArgumentException.class);
         repository.findById(null);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void updateShouldThrowIllegalArgument() {
+        exception.expect(IllegalArgumentException.class);
         repository.update(null);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void saveShouldThrowIllegalArgument() {
-        repository.save(null);
+        assertFalse(repository.save(null));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void saveShouldThrowIllegalArgument2() {
-        repository.save(User.builder().withId(1).build());
+        assertFalse(repository.save(User.builder().withId(1).build()));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void updateShouldThrowIllegalArgument2() {
+        exception.expect(IllegalArgumentException.class);
         repository.update(User.builder().withId(2).build());
     }
 

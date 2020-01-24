@@ -1,9 +1,10 @@
 package com.bank.view;
 
-import com.bank.utility.Constants;
 
 import java.util.Scanner;
 import java.util.regex.Pattern;
+
+import static com.bank.utility.Constants.WRONG_INPUT_MESSAGE;
 
 public class InputHandler {
 
@@ -22,7 +23,7 @@ public class InputHandler {
         while (true) {
             String receivedString = sc.nextLine().trim();
             if (!isInteger(receivedString)) {
-                view.print(Constants.WRONG_INPUT_MESSAGE);
+                view.print(WRONG_INPUT_MESSAGE);
             } else {
                 return Integer.parseInt(receivedString);
             }
